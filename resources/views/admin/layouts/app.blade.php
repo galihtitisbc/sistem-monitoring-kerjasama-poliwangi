@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
+
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="assets/modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="assets/modules/weather-icon/css/weather-icons.min.css">
@@ -21,6 +22,8 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
+    {{-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> --}}
+
 
 </head>
 
@@ -208,18 +211,20 @@
                         </li>
 
                         <li class="menu-header">Data</li>
-                        <li class="dropdown">
+                        {{-- <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fas fa-columns"></i> <span>Layout</span></a>
+                                    class="fas fa-table"></i></i> <span>Data Kerja Sama</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                                <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                                <li><a class="nav-link" href="layout-default.html">Lihat Data</a></li>
+                                <li><a class="nav-link" href="layout-transparent.html">Tambah Data</a></li>
                                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                             </ul>
-                        </li>
-                        <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank
-                                    Page</span></a></li>
-                        <li class="dropdown">
+                        </li> --}}
+                        <li><a class="nav-link" href="blank.html"><i class="fas fa-table"></i> <span>Data Kerja
+                                    Sama</span></a></li>
+                        <li><a class="nav-link" href="blank.html"><i class="fas fa-plus-square"></i><span>Tambah
+                                    Kerja Sama</span></a></li>
+                        {{-- <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                                 <span>Bootstrap</span></a>
                             <ul class="dropdown-menu">
@@ -244,7 +249,7 @@
                                 <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
                                 <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
 
                     </ul>
 
