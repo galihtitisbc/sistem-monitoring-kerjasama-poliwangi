@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="assets/css/components.css">
     {{-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> --}}
 
-
+    @stack('css')
 </head>
 
 <body>
@@ -222,7 +222,8 @@
                         </li> --}}
                         <li><a class="nav-link" href="blank.html"><i class="fas fa-table"></i> <span>Data Kerja
                                     Sama</span></a></li>
-                        <li><a class="nav-link" href="blank.html"><i class="fas fa-plus-square"></i><span>Tambah
+                        <li><a class="nav-link {{ request()->segment(1) == 'tambah-kerja-sama' ? 'active' : '' }}"
+                                href="/tambah-kerja-sama"><i class="fas fa-plus-square"></i><span>Tambah
                                     Kerja Sama</span></a></li>
                         {{-- <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
@@ -297,6 +298,7 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
+    @stack('js')
 </body>
 
 </html>

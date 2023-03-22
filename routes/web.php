@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KerjasamaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/login');
 });
 // Route::get('/test', function () {
 //     return view('auth.layouts.main-login');
 // });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/tambah-kerja-sama', [KerjasamaController::class, 'index']);
+});
