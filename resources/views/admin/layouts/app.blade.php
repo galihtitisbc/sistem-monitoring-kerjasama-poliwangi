@@ -207,7 +207,7 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="dropdown {{ request()->is('home') ? 'active' : '' }}">
-                            <a href="#" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a>
+                            <a href="/home" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a>
                         </li>
 
                         <li class="menu-header">Data</li>
@@ -222,8 +222,9 @@
                         </li> --}}
                         <li><a class="nav-link" href="blank.html"><i class="fas fa-table"></i> <span>Data Kerja
                                     Sama</span></a></li>
-                        <li><a class="nav-link {{ request()->segment(1) == 'tambah-kerja-sama' ? 'active' : '' }}"
-                                href="/tambah-kerja-sama"><i class="fas fa-plus-square"></i><span>Tambah
+                        <li class="{{ request()->segment(1) == 'tambah-kerja-sama' ? 'active' : '' }}"><a
+                                class="nav-link" href="/tambah-kerja-sama"><i
+                                    class="fas fa-plus-square"></i><span>Tambah
                                     Kerja Sama</span></a></li>
                         {{-- <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>

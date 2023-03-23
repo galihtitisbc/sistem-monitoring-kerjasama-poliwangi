@@ -27,4 +27,5 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/tambah-kerja-sama', [KerjasamaController::class, 'index']);
+    Route::post('/tambah-kerjasama', [KerjasamaController::class, 'tambahDataKerjasama']);
 });

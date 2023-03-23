@@ -9,6 +9,7 @@ class Permohonan extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_permohonan';
+    protected $guarded = ['id_permohonan'];
 
     public function kategori()
     {
