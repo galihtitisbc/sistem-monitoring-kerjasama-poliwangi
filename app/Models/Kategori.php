@@ -10,8 +10,8 @@ class Kategori extends Model
     use HasFactory;
     protected $primaryKey = 'id_kategori';
     protected $guarded = ['id_kategori'];
-    public function permohonan()
+    public function kerjasama()
     {
-        return $this->hasOne(Permohonan::class, 'id_kategori');
+        return $this->hasOne(Kerjasama::class, 'id_kategori');
     }
 }

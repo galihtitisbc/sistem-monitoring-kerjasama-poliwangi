@@ -11,17 +11,14 @@
                         <div class="card-body">
                             @if (session('success'))
                                 <div class="alert alert-success">
-                                    {{ session('status') }}
+                                    {{ session('success') }}
                                 </div>
                             @endif
                             @if (session('error'))
                                 <div class="alert alert-danger">
-                                    {{ session('status') }}
+                                    {{ session('error') }}
                                 </div>
                             @endif
-                            <div class="alert alert-success" role="alert">
-                                A simple success alert—check it out!
-                            </div>
                             <form action="{{ url('tambah-kerjasama') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

@@ -26,6 +26,8 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/tambah-kerja-sama', [KerjasamaController::class, 'index']);
-    Route::post('/tambah-kerjasama', [KerjasamaController::class, 'tambahDataKerjasama']);
+    Route::get('/tambah-kerja-sama', [KerjasamaController::class, 'tambahDataKerjasama']);
+    Route::post('/tambah-kerjasama', [KerjasamaController::class, 'store']);
+    Route::get('/data-kerjasama', [KerjasamaController::class, 'index']);
+    Route::get('/download/{mou}', [KerjasamaController::class, 'download']);
 });

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>
-        {{ env('APP_NAME') }}
+        {{ $title }}
     </title>
 
     <!-- General CSS Files -->
@@ -220,7 +220,9 @@
                                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                             </ul>
                         </li> --}}
-                        <li><a class="nav-link" href="blank.html"><i class="fas fa-table"></i> <span>Data Kerja
+                        <li class="{{ request()->segment(1) == 'data-kerjasama' ? 'active' : '' }}"><a
+                                class="nav-link" href="/data-kerjasama"><i class="fas fa-table"></i>
+                                <span>Data Kerja
                                     Sama</span></a></li>
                         <li class="{{ request()->segment(1) == 'tambah-kerja-sama' ? 'active' : '' }}"><a
                                 class="nav-link" href="/tambah-kerja-sama"><i

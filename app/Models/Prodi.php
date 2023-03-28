@@ -10,8 +10,8 @@ class Prodi extends Model
     use HasFactory;
     protected $primaryKey = 'id_prodi';
     protected $guarded = ['id_prodi'];
-    public function permohonan()
+    public function kerjasama()
     {
-        return $this->belongsToMany(Permohonan::class, 'permohonan_prodis', 'id_prodi', 'id_permohonan');
+        return $this->belongsToMany(Kerjasama::class, 'kerjasama_prodis', 'id_prodi', 'id_kerjasama');
     }
 }
