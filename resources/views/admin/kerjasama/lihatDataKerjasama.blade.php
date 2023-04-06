@@ -42,6 +42,8 @@
                                         <th scope="col">Kategori</th>
                                         <th scope="col">Tanggal Mulai</th>
                                         <th scope="col">Tanggal Berakhir</th>
+                                        <th scope="col">Soft File</th>
+                                        <th scope="col">Hard File</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                 </thead>
@@ -54,6 +56,13 @@
                                             <td>{{ $item->kategori->nama_kategori }}</td>
                                             <td>{{ $item->tgl_mulai }}</td>
                                             <td>{{ $item->tgl_berakhir }}</td>
+                                            <td>
+                                                @if ($item->hard_file == 0)
+                                                    Tidak Tersedia
+                                                @else
+                                                    Tersedia
+                                                @endif
+                                            </td>
                                             <td>{{ $item->status }}</td>
                                         </tr>
                                     @endforeach
