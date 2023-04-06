@@ -24,7 +24,8 @@ class CreateKerjasamasTable extends Migration
             $table->string('implementasi');
             $table->date('tgl_mulai');
             $table->date('tgl_berakhir');
-            $table->string('status', 20)->default('pending');
+            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('hard_file')->default(0);
             $table->timestamps();
         });
     }

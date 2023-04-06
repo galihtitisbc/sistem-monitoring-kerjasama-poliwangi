@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(1)->create();
-        // \App\Models\User::factory()->create([
-        //     'email' => 'admin@admin.com',
-        //     'password' => Hash::make('admin')
-        // ]);
+        \App\Models\User::factory()->create([
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('admin'),
+            'role' => 'admin'
+        ]);
         $this->call(KategoriSeeder::class);
         $this->call(ProdiSeeder::class);
     }
