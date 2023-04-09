@@ -36,9 +36,9 @@ class KerjasamaController extends Controller
             $fileMou->storeAs('public/file-mou', $validated['nomor_mou'] . "." . $fileMou->getClientOriginalExtension());
             $validated['id_user'] = Auth::user()->id;
             $validated['id_kategori'] = $validated['kategori'];
-            if (Auth::user()->role == "admin") {
-                $validated['status'] = "Diterima";
-            }
+            // if (Auth::user()->role == "admin") {
+            //     $validated['status'] = "Diterima";
+            // }
             $permohonan = Kerjasama::create($validated);
             $permohonan->prodi()->attach($validated['prodi']);
             return redirect('/tambah-kerja-sama')->with('success', 'Berhasil Menambahkan Data Kerjasama');

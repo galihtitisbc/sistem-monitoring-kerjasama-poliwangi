@@ -19,7 +19,8 @@
                                     {{ session('error') }}
                                 </div>
                             @endif
-                            <form action="{{ url('tambah-kerjasama') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('tambah-kerjasama') }}" method="POST" enctype="multipart/form-data"
+                                id="form-tambah">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">
@@ -161,7 +162,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="button-tambah" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -177,6 +178,23 @@
         <script>
             $(document).ready(function() {
                 $('.prodi').select2();
+                $('#button-tambah').on("click", function(e) {
+                    e.preventDefault();
+                    var form = $(this).parents('form');
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Apakah Anda Yakin ?',
+                        showDenyButton: true,
+                        confirmButtonText: 'Yakin',
+                        denyButtonText: `Tidak`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $("#form-tambah").submit();
+                        } else if (result.isDenied) {
+                            Swal.fire('Data Tidak Ditambahkan', '', 'success')
+                        }
+                    })
+                })
             });
         </script>
     @endpush
