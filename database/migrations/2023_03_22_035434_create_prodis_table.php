@@ -15,7 +15,7 @@ class CreateProdisTable extends Migration
     {
         Schema::create('prodis', function (Blueprint $table) {
             $table->id('id_prodi');
-            $table->string('nama_prodi');
+            $table->string('nama_prodi')->unique();
             $table->timestamps();
         });
     }

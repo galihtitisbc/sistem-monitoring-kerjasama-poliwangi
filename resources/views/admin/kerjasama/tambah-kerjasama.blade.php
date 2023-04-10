@@ -177,7 +177,12 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('.prodi').select2();
+                $('#prodi').select2({
+                    tags: true
+                });
+                $('#kategori').select2({
+                    tags: true
+                });
                 $('#button-tambah').on("click", function(e) {
                     e.preventDefault();
                     var form = $(this).parents('form');
