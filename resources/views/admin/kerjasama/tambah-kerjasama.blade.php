@@ -159,6 +159,26 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="hard_file">Hard File</label>
+                                            <select
+                                                class="form-control @error('hard_file')
+                                                is-invalid
+                                            @enderror hard_file"
+                                                id="hard_file" name="hard_file">
+                                                <option value=""></option>
+
+                                                <option value="0" selected>
+                                                    Tidak Ada
+                                                </option>
+                                                <option value="1">
+                                                    Ada
+                                                </option>
+                                            </select>
+                                            @error('hard_file')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
