@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TambahKerjasamaRequest;
+use App\Models\Prodi;
 use App\Models\Kategori;
 use App\Models\Kerjasama;
 use App\Models\Permohonan;
-use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Trait\TambahKategoriDanProdi;
+use App\Http\Requests\TambahKerjasamaRequest;
 
 class KerjasamaController extends Controller
 {
+    use TambahKategoriDanProdi;
     public function index()
     {
         return view('admin.kerjasama.lihatDataKerjasama', [
@@ -33,6 +35,17 @@ class KerjasamaController extends Controller
         // dd($request);
         $validated = $request->validated();
         $fileMou = $request->file('mou');
+        foreach ($validated['prodi'] as $value) {
+            if (is_numeric($value) != 1) {
+                $id = $this->tambahProdi($value);
+                $key = array_search($value, $validated['prodi']);
+                unset($validated['prodi'][$key]);
+                array_push($validated['prodi'], $id);
+            }
+        }
+        if (is_numeric($validated['kategori']) != 1) {
+            $validated['kategori'] = $this->tambahKategori($validated['kategori']);
+        }
         try {
             $fileMou->storeAs('public/file-mou', $validated['nomor_mou'] . "." . $fileMou->getClientOriginalExtension());
             $validated['id_user'] = Auth::user()->id;
