@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Manfaat Kerjasama</label>
-                                            <textarea
+                                            <textarea placeholder="Masukkan Manfaat Kerjasama"
                                                 class="form-control @error('manfaat')
                                                 is-invalid
                                             @enderror"
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea2">Implmentasi Kerjasama</label>
-                                            <textarea
+                                            <textarea placeholder="Masukkan Implementasi Kerjasama"
                                                 class="form-control @error('implementasi')
                                                 is-invalid
                                             @enderror"
@@ -93,11 +93,12 @@
                                                     @error('tgl_berakhir')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+
+                                                </div>
+                                                {{-- <div class="col">
                                                 </div>
                                                 <div class="col">
-                                                </div>
-                                                <div class="col">
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -198,10 +199,14 @@
         <script>
             $(document).ready(function() {
                 $('#prodi').select2({
-                    tags: true
+                    tags: true,
+                    placeholder: "Pilih Prodi",
+                    // selectionCssClass: "form-control"
+
                 });
                 $('#kategori').select2({
-                    tags: true
+                    tags: true,
+                    placeholder: "Pilih Kategori"
                 });
                 $('#button-tambah').on("click", function(e) {
                     e.preventDefault();

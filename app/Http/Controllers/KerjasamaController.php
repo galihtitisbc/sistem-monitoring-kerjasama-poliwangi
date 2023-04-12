@@ -17,14 +17,14 @@ class KerjasamaController extends Controller
     use TambahKategoriDanProdi;
     public function index()
     {
-        return view('admin.kerjasama.lihatDataKerjasama', [
+        return view('admin.kerjasama.lihatKerjasama', [
             'title'     =>  'Daftar Kerjasama',
-            'kerjasama' =>  Kerjasama::with('kategori')->get()
+            'kerjasama' =>  Kerjasama::with('kategori')->paginate(5),
         ]);
     }
     public function tambahDataKerjasama()
     {
-        return view('admin.kerjasama.tambah-kerjasama', [
+        return view('admin.kerjasama.tambahKerjasama', [
             'prodi'     =>  Prodi::all(),
             'kategori'  =>  Kategori::all(),
             'title'     => 'Tambah Data Kerjasama'
