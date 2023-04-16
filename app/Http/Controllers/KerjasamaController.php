@@ -17,14 +17,14 @@ class KerjasamaController extends Controller
     use TambahKategoriDanProdi;
     public function index()
     {
-        return view('admin.kerjasama.lihatDataKerjasama', [
+        return view('admin.kerjasama.lihatKerjasama', [
             'title'     =>  'Daftar Kerjasama',
-            'kerjasama' =>  Kerjasama::with('kategori')->get()
+            'kerjasama' =>  Kerjasama::with('kategori')->paginate(5),
         ]);
     }
     public function tambahDataKerjasama()
     {
-        return view('admin.kerjasama.tambah-kerjasama', [
+        return view('admin.kerjasama.tambahKerjasama', [
             'prodi'     =>  Prodi::all(),
             'kategori'  =>  Kategori::all(),
             'title'     => 'Tambah Data Kerjasama'
@@ -32,6 +32,7 @@ class KerjasamaController extends Controller
     }
     public function store(TambahKerjasamaRequest $request)
     {
+        // dd($request);
         $validated = $request->validated();
         $fileMou = $request->file('mou');
         foreach ($validated['prodi'] as $value) {
@@ -56,7 +57,8 @@ class KerjasamaController extends Controller
             $permohonan->prodi()->attach($validated['prodi']);
             return redirect('/tambah-kerja-sama')->with('success', 'Berhasil Menambahkan Data Kerjasama');
         } catch (\Throwable $e) {
-            return redirect('/tambah-kerja-sama')->with('error', 'Gagal Menambahkan Data Kerjasama');
+            return $e;
+            // return redirect('/tambah-kerja-sama')->with('error', 'Gagal Menambahkan Data Kerjasama');
         }
     }
     public function download($nomor_mou)

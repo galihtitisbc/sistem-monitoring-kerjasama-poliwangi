@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="assets/css/components.css">
     @livewireStyles
     {{-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> --}}
-
+    <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.min.css" rel="stylesheet"
+        type="text/css" />
     @stack('css')
 </head>
 
@@ -269,8 +270,10 @@
             @yield('content')
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                        Nauval Azhar</a>
+                    <div class="text-center">
+                        <p>Page Load {{ round(microtime(true) - LARAVEL_START, 3) }}s
+                        </p>
+                    </div>
                 </div>
                 <div class="footer-right">
 

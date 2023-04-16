@@ -4168,3 +4168,10 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 }
 
 /*# sourceMappingURL=style.css.map */
+.icon-ganteng{
+    font-size: 22px;
+}
+.select2 {
+    width:100%!important;
+    height: 42px!important;
+    }
