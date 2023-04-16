@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\KerjasamaController;
+use App\Models\Kerjasama;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KerjasamaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,8 @@ Route::get('/', function () {
     return redirect('/login');
 });
 // Route::get('/test', function () {
-//     return view('auth.layouts.main-login');
+//     return
+//         Kerjasama::selectRaw('COUNT(id_kerjasama) as total,YEAR(created_at) as tahun')->groupBy(DB::raw('YEAR(created_at)'))->get();
 // });
 Auth::routes();
 

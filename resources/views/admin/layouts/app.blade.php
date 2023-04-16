@@ -22,6 +22,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
+    @livewireStyles
     {{-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> --}}
 
     @stack('css')
@@ -302,6 +303,7 @@
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireScripts
     @stack('js')
 </body>
 

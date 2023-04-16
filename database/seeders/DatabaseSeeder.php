@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kerjasama;
+use App\Models\Prodi;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,5 +24,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call(KategoriSeeder::class);
         $this->call(ProdiSeeder::class);
+        Kerjasama::factory()->count(100)->create();
+        $prodi = Prodi::all();
+        Kerjasama::all()->each(function ($kerjasama) use ($prodi) {
+            $kerjasama->prodi()->attach(
+                $prodi->random(rand(1, 5))->pluck('id_prodi')->toArray()
+            );
+        });
     }
 }

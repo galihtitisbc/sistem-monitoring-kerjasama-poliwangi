@@ -66,81 +66,10 @@
                 </div>
             </div>
             <div class="row">
-                {{-- <div class="col-12 col-md-6 col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Line Chart</h4>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myChart44"></canvas>
-                        </div>
-                    </div>
-                </div> --}}
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="card">
-                        <div>
-                            <canvas id="myChart23"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="card">
-                        <div>
-                            <canvas id="myChart44"></canvas>
-                        </div>
-                    </div>
+                <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                    @livewire('chart-utama')
                 </div>
             </div>
-
-
         </section>
     </div>
 @endsection
-@push('js')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('myChart23');
-        const ctx2 = document.getElementById('myChart44');
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                    backgroundColor: "blue"
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                    backgroundColor: "blue"
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-@endpush
