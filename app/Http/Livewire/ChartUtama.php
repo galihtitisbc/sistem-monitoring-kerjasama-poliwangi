@@ -16,10 +16,10 @@ class ChartUtama extends Component
     {
         $kerjasama = Kerjasama::selectRaw('COUNT(id_kerjasama) as total,YEAR(created_at) as tahun');
         if ($this->tahunDari != "all") {
-            $kerjasama->whereYear(DB::raw('YEAR(created_at)'), '>=', Carbon::createFromFormat('Y', $this->tahunDari)->format('Y'));
+            $kerjasama->whereYear('created_at', '>=', trim($this->tahun));
         }
         if ($this->tahunKe != "all") {
-            $kerjasama->whereYear(DB::raw('YEAR(created_at)'), '<=', Carbon::createFromFormat('Y', $this->tahunKe)->format('Y'));
+            $kerjasama->whereYear('created_at', '<=', trim($this->tahunKe));
         }
         $kerjasama->groupBy(DB::raw('YEAR(created_at)'))->orderBy('created_at', 'ASC');
         $data = [];
