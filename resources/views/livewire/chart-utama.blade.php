@@ -31,7 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $('.select-tahun').on('change', function() {
-            Livewire.emit('$refresh')
+            // Livewire.emit('$refresh')
         });
         let dataKerjasama = <?php echo json_encode($kerjasama); ?>;
         console.log(dataKerjasama);

@@ -16,7 +16,7 @@ class ChartUtama extends Component
     {
         $kerjasama = Kerjasama::selectRaw('COUNT(id_kerjasama) as total,YEAR(created_at) as tahun');
         if ($this->tahunDari != "all") {
-            $kerjasama->whereYear('created_at', '>=', trim($this->tahun));
+            $kerjasama->whereYear('created_at', '>=', trim($this->tahunDari));
         }
         if ($this->tahunKe != "all") {
             $kerjasama->whereYear('created_at', '<=', trim($this->tahunKe));
@@ -27,7 +27,6 @@ class ChartUtama extends Component
             $data['data'][] = $value->total;
             $data['label'][] = $value->tahun;
         }
-        dump($data);
         return view('livewire.chart-utama', [
             'kerjasama' =>  $data
         ]);
