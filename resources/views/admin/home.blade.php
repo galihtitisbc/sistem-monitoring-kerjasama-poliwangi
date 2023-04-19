@@ -67,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-                    @livewire('chart-utama')
+                    @include('admin.kerjasama.chart')
                 </div>
             </div>
         </section>

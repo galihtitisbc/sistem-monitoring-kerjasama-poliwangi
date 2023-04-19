@@ -9,26 +9,31 @@ use Illuminate\Support\Facades\DB;
 
 class ChartUtama extends Component
 {
+    public $dataKerjasama;
     public $tahunDari = "all";
     public $tahunKe = "all";
     protected $queryString = ['tahunDari', 'tahunKe'];
+    protected $listeners = ['ubahData' => 'updateData'];
     public function render()
     {
         $kerjasama = Kerjasama::selectRaw('COUNT(id_kerjasama) as total,YEAR(created_at) as tahun');
-        if ($this->tahunDari != "all") {
-            $kerjasama->whereYear('created_at', '>=', trim($this->tahunDari));
-        }
-        if ($this->tahunKe != "all") {
-            $kerjasama->whereYear('created_at', '<=', trim($this->tahunKe));
-        }
+        $kerjasama->when($this->tahunDari != "all", function ($q) {
+            $q->whereYear('created_at', '>=', trim($this->tahunDari));
+        });
+        $kerjasama->when($this->tahunKe != "all", function ($q) {
+            $q->whereYear('created_at', '>=', trim($this->tahunKe));
+        });
         $kerjasama->groupBy(DB::raw('YEAR(created_at)'))->orderBy('created_at', 'ASC');
         $data = [];
         foreach ($kerjasama->get() as $key => $value) {
             $data['data'][] = $value->total;
             $data['label'][] = $value->tahun;
         }
-        return view('livewire.chart-utama', [
-            'kerjasama' =>  $data
-        ]);
+        $this->dataKerjasama = $data;
+        return view('livewire.chart-utama');
+    }
+    public function updateData()
+    {
+        $this->emit('berhasilUpdate', ['data' => $this->dataKerjasama]);
     }
 }

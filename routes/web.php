@@ -34,4 +34,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tambah-kerjasama', [KerjasamaController::class, 'store']);
     Route::get('/data-kerjasama', [KerjasamaController::class, 'index']);
     Route::get('/download/{mou}', [KerjasamaController::class, 'download']);
+    Route::get('/tampildatachart', [HomeController::class, 'dataChart']);
 });

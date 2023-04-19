@@ -22,7 +22,8 @@
                         </select>
                     </div>
                 </div>
-                <canvas id="myChart23"></canvas>
+                {{ print_r($dataKerjasama) }}
+                <canvas id="chart-utama"></canvas>
             </div>
         </div>
     </div>
@@ -30,14 +31,13 @@
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        setInterval(() => Livewire.emit('ubahData'), 3000);
+        let dataKerjasama = {{ Illuminate\Support\Js::from($dataKerjasama) }}
         $('.select-tahun').on('change', function() {
-            // Livewire.emit('$refresh')
-        });
-        let dataKerjasama = <?php echo json_encode($kerjasama); ?>;
-        console.log(dataKerjasama);
-        const ctx = document.getElementById('myChart23');
-        const ctx2 = document.getElementById('myChart44');
 
+        });
+        console.log(dataKerjasama);
+        const ctx = document.getElementById('chart-utama');
         new Chart(ctx, {
             type: 'bar',
             data: {
@@ -57,24 +57,9 @@
                 }
             }
         });
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                    backgroundColor: "blue"
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+        Livewire.on('updateData', event => {
+            alert("dfg")
+            console.log("df");
+        })
     </script>
 @endpush
