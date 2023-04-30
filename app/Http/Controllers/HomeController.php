@@ -36,9 +36,9 @@ class HomeController extends Controller
             $q->whereYear('created_at', '>=', trim($request->query('tahunDari')));
         });
         $kerjasama->when($request->query('tahunKe') != "all", function ($q) use ($request) {
-            $q->whereYear('created_at', '>=', trim($request->query('tahunKe')));
+            $q->whereYear('created_at', '<=', trim($request->query('tahunKe')));
         });
-        $kerjasama->groupBy(DB::raw('YEAR(created_at)'))->orderBy('created_at', 'ASC');
+        $kerjasama->groupBy('tahun')->orderBy('created_at', 'ASC');
         $data = [];
         foreach ($kerjasama->get() as $key => $value) {
             $data['data'][] = $value->total;

@@ -36,3 +36,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/download/{mou}', [KerjasamaController::class, 'download']);
     Route::get('/tampildatachart', [HomeController::class, 'dataChart']);
 });
+Route::get('/test', [HomeController::class, 'dataChart']);
