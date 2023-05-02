@@ -19,11 +19,11 @@
                         </select>
                     </div>
                 </div>
-                <canvas id="chart-utama"></canvas>
+                <canvas id="chart-prodi"></canvas>
             </div>
         </div>
     </div>
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="{{ asset('js/chart-utama.js') }}"></script>
+        <script src="{{ asset('js/chart-prodi.js') }}"></script>
     @endpush
