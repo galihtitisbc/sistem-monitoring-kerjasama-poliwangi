@@ -35,5 +35,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/data-kerjasama', [KerjasamaController::class, 'index']);
     Route::get('/download/{mou}', [KerjasamaController::class, 'download']);
     Route::get('/tampildatachart', [HomeController::class, 'dataChart']);
+    Route::get('/edit-kerjasama/{id}', [KerjasamaController::class, 'show'])->name('edit-kerjasama');
 });
 Route::get('/test', [HomeController::class, 'dataChart']);

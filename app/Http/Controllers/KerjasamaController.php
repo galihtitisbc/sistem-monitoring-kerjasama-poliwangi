@@ -71,4 +71,14 @@ class KerjasamaController extends Controller
             return redirect('/data-kerjasama')->with('error', 'Gagal Download File Mou, File Tidak Ada');
         }
     }
+    public function show($id)
+    {
+        $kerjasama = Kerjasama::with(['prodi', 'kategori'])->findOrFail($id);
+        return  view('admin.kerjasama.editKerjasama', [
+            'title' => 'Detail Kerjasama',
+            'kerjasama' => $kerjasama,
+            'prodi'     =>  Prodi::all(),
+            'kategori'  =>  Kategori::all(),
+        ]);
+    }
 }

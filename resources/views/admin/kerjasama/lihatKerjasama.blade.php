@@ -68,7 +68,7 @@
                                                 <td class=""><a href="/download/{{ $item->nomor_mou }}"><i
                                                             class="icon-ganteng fa-solid fa-folder-arrow-down"></i></a></td>
                                                 <td class="aksi">
-                                                    <a href="/"><i
+                                                    <a href="{{ route('edit-kerjasama', $item->id_kerjasama) }}"><i
                                                             class="icon-ganteng fa-solid fa-pen-to-square"></i></a>
                                                     <a href="/"><i class="icon-ganteng fa-solid fa-trash-can"></i></a>
 
