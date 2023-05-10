@@ -26,6 +26,7 @@ class CreateKerjasamasTable extends Migration
             $table->date('tgl_berakhir');
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('hard_file')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

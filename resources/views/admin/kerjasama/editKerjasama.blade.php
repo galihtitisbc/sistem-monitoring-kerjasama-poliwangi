@@ -19,8 +19,9 @@
                                     {{ session('error') }}
                                 </div>
                             @endif
-                            <form action="{{ url('tambah-kerjasama') }}" method="POST" enctype="multipart/form-data"
-                                id="form-tambah">
+                            <form action="{{ route('update-kerjasama', $kerjasama->id_kerjasama) }}" method="POST"
+                                enctype="multipart/form-data" id="form-tambah">
+                                @method('PUT')
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">

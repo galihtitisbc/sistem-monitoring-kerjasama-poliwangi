@@ -26,7 +26,7 @@ class KerjasamaFactory extends Factory
             'implementasi'      =>  $this->faker->paragraph(1),
             'tgl_mulai'         =>  $this->faker->date('Y-m-d'),
             'tgl_berakhir'      =>  $this->faker->date('Y-m-d', 'now'),
-            'created_at'        =>  $this->faker->dateTimeBetween()
+            'created_at'        =>  $this->faker->dateTimeBetween(),
         ];
     }
 }

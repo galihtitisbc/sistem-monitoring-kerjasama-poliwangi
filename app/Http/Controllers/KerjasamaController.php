@@ -81,4 +81,49 @@ class KerjasamaController extends Controller
             'kategori'  =>  Kategori::all(),
         ]);
     }
+    public function update(TambahKerjasamaRequest $request, $id)
+    {
+        // dd($request->all());
+        $validated = $request->validated();
+        $fileMou = $request->file('mou');
+        foreach ($validated['prodi'] as $value) {
+            if (is_numeric($value) != 1) {
+                $id = $this->tambahProdi($value);
+                $key = array_search($value, $validated['prodi']);
+                unset($validated['prodi'][$key]);
+                array_push($validated['prodi'], $id);
+            }
+        }
+        if (is_numeric($validated['kategori']) != 1) {
+            $validated['kategori'] = $this->tambahKategori($validated['kategori']);
+        }
+        try {
+            $fileMou->storeAs('public/file-mou', $validated['nomor_mou'] . "." . $fileMou->getClientOriginalExtension());
+            $validated['id_user'] = Auth::user()->id;
+            $validated['id_kategori'] = $validated['kategori'];
+            // if (Auth::user()->role == "admin") {
+            //     $validated['status'] = "Diterima";
+            // }
+            // $permohonan = Kerjasama::($validated);
+            $permohonan = Kerjasama::findOrFail($id);
+            $permohonan->update($validated);
+            // dd($permohonan->prodi()->sync($validated['prodi']));
+            $permohonan->prodi()->sync($validated['prodi']);
+            return redirect('/tambah-kerja-sama')->with('success', 'Berhasil Mengubah Data Kerjasama');
+        } catch (\Throwable $e) {
+            return $e;
+            // return redirect('/tambah-kerja-sama')->with('error', 'Gagal Menambahkan Data Kerjasama');
+        }
+    }
+    public function destroy($id)
+    {
+        try {
+            $kerjasama = Kerjasama::findOrFail($id);
+            $kerjasama->delete();
+            return redirect('/data-kerjasama')->with('success', 'Berhasil Menghapus Data Kerjasama');
+        } catch (\Throwable $e) {
+            // return $e;
+            return redirect('/data-kerjasama')->with('error', 'Gagal Menghapus Data Kerjasama');
+        }
+    }
 }

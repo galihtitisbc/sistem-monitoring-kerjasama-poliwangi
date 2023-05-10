@@ -1,4 +1,19 @@
 @extends('admin.layouts.app')
+@push('css')
+    <style>
+        .tio-button {
+            border: none !important;
+            background: none !important;
+            color: #780000;
+            cursor: pointer;
+        }
+
+        .action {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -12,6 +27,11 @@
                             @if (session('error'))
                                 <div class="alert alert-danger">
                                     {{ session('error') }}
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
                                 </div>
                             @endif
                             <form action="" class="">
@@ -67,12 +87,19 @@
                                                 <td>{{ $item->status == 0 ? 'Belum Disetujui' : 'Disetujui' }}</td>
                                                 <td class=""><a href="/download/{{ $item->nomor_mou }}"><i
                                                             class="icon-ganteng fa-solid fa-folder-arrow-down"></i></a></td>
-                                                <td class="aksi">
-                                                    <a href="{{ route('edit-kerjasama', $item->id_kerjasama) }}"><i
-                                                            class="icon-ganteng fa-solid fa-pen-to-square"></i></a>
-                                                    <a href="/"><i class="icon-ganteng fa-solid fa-trash-can"></i></a>
+                                                <td class=" ">
+                                                    <div class="action">
+                                                        <a href="{{ route('edit-kerjasama', $item->id_kerjasama) }}"><i
+                                                                class="icon-ganteng fa-solid fa-pen-to-square"></i></a>
+                                                        <form method="POST" class="submitdelete"
+                                                            action="{{ route('hapus-kerjasama', $item->id_kerjasama) }}">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="tio-button" type="submit" href=""><i
+                                                                    class="icon-ganteng fa-solid fa-trash-can"></i></button>
 
-
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -89,4 +116,26 @@
     </div>
     </section>
     </div>
+    @push('js')
+        <script>
+            $('.tio-button').on("click", function(e) {
+                e.preventDefault();
+                // var form = $(this).parents('form');
+                var form = $(this).closest("form");
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Apakah Anda Yakin ?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Yakin',
+                    denyButtonText: `Tidak`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    } else if (result.isDenied) {
+                        Swal.fire('Data Tidak Ditambahkan', '', 'success')
+                    }
+                })
+            })
+        </script>
+    @endpush
 @endsection

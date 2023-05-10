@@ -8,7 +8,6 @@
         {{ $title }}
     </title>
 
-    @livewireStyles
     <!-- General CSS Files -->
 
     <link rel="stylesheet" href="{{ config('app.url') }}/assets/modules/bootstrap/css/bootstrap.min.css">
@@ -294,14 +293,14 @@
 
     <!-- JS Libraies -->
     <script src="{{ config('app.url') }}/assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
-    <script src="{{ config('app.url') }}/assets/modules/chart.min.js"></script>
+    {{-- <script src="{{ config('app.url') }}/assets/modules/chart.min.js"></script> --}}
     <script src="{{ config('app.url') }}/assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="{{ config('app.url') }}/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script src="{{ config('app.url') }}/assets/modules/summernote/summernote-bs4.js"></script>
     <script src="{{ config('app.url') }}/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
     <!-- Page Specific JS File -->
-    <script src="{{ config('app.url') }}/assets/js/page/index-0.js"></script>
+    {{-- <script src="{{ config('app.url') }}/assets/js/page/index-0.js"></script> --}}
 
     <!-- Template JS File -->
     <script src="{{ config('app.url') }}/assets/js/scripts.js"></script>
