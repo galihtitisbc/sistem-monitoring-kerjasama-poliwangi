@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kerjasama;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,6 +44,23 @@ class HomeController extends Controller
         foreach ($kerjasama->get() as $key => $value) {
             $data['data'][] = $value->total;
             $data['label'][] = $value->tahun;
+        }
+        return response()->json($data, 200);
+    }
+    public function dataChartProdi(Request $request)
+    {
+        $prodi = Prodi::withCount(['kerjasama' => function ($query) use ($request) {
+            $query->when($request->query('tahunDari') != "all", function ($q) use ($request) {
+                $q->whereYear('kerjasamas.created_at', '>=', trim($request->query('tahunDari')));
+            });
+            $query->when($request->query('tahunKe') != "all", function ($q) use ($request) {
+                $q->whereYear('kerjasamas.created_at', '<=', trim($request->query('tahunKe')));
+            });
+        }])->get();
+        $data = [];
+        foreach ($prodi as $key) {
+            $data['nama_prodi'][] = $key->nama_prodi;
+            $data['total'][] = $key->kerjasama_count;
         }
         return response()->json($data, 200);
     }

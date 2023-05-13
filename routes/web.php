@@ -35,8 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/data-kerjasama', [KerjasamaController::class, 'index']);
     Route::get('/download/{mou}', [KerjasamaController::class, 'download']);
     Route::get('/tampildatachart', [HomeController::class, 'dataChart']);
+    Route::get('/data-chart-prodi', [HomeController::class, 'dataChartProdi']);
     Route::get('/edit-kerjasama/{id}', [KerjasamaController::class, 'show'])->name('edit-kerjasama');
     Route::put('/edit-kerjasama/{id}', [KerjasamaController::class, 'update'])->name('update-kerjasama');
     Route::delete('/hapus-kerjasama/{id}', [KerjasamaController::class, 'destroy'])->name('hapus-kerjasama');
 });
-Route::get('/test', [HomeController::class, 'dataChart']);
+Route::get('/test', [HomeController::class, 'dataChartProdi']);
