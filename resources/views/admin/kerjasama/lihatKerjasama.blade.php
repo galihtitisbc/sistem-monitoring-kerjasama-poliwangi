@@ -85,7 +85,8 @@
                                                     {{ $item->hard_file == 0 ? 'Tidak Tersedia' : 'Tersedia' }}
                                                 </td>
                                                 <td>{{ $item->status == 0 ? 'Belum Disetujui' : 'Disetujui' }}</td>
-                                                <td class=""><a href="/download/{{ $item->nomor_mou }}"><i
+                                                <td class=""><a
+                                                        href="/download/{{ str_replace('/', '-', $item->nomor_mou) }}"><i
                                                             class="icon-ganteng fa-solid fa-folder-arrow-down"></i></a></td>
                                                 <td class=" ">
                                                     <div class="action">

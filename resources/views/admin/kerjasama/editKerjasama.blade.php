@@ -160,6 +160,7 @@
                                             <label for="exampleInputmou1">Nomor Mou</label>
                                             <input type="hidden" name="nomor_mou_old"
                                                 value="{{ $kerjasama->nomor_mou }}">
+                                            <input type="hidden" name="file_mou" value="{{ $kerjasama->file_mou }}">
                                             <input value="{{ $kerjasama->nomor_mou }}" type="text"
                                                 class="form-control @error('nomor_mou')
                                                 is-invalid

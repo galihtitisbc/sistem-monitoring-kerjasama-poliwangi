@@ -35,7 +35,8 @@ class UpdateKerjasamaRequest extends FormRequest
             'implementasi'      => 'required',
             'mou'               =>  'sometimes|nullable|mimes:docx,pdf',
             'nomor_mou'         =>  'required',
-            'nomor_mou_old'         =>  'required'
+            'nomor_mou_old'         =>  'required',
+            'file_mou'         =>  'required'
         ];
     }
 }

@@ -19,6 +19,7 @@ class CreateKerjasamasTable extends Migration
             $table->foreignId('id_kategori')->references('id_kategori')->on('kategoris');
             $table->string('nama_instansi');
             $table->string('nomor_mou');
+            $table->string('file_mou');
             $table->string('jenis_kegiatan');
             $table->string('manfaat');
             $table->string('implementasi');

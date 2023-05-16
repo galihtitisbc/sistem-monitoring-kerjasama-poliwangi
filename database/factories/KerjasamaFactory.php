@@ -21,6 +21,7 @@ class KerjasamaFactory extends Factory
             'id_kategori'   =>  rand(1, 5),
             'nama_instansi' =>  $this->faker->name,
             'nomor_mou'     => $this->faker->phoneNumber,
+            'file_mou'     => $this->faker->phoneNumber,
             'jenis_kegiatan'    =>  $this->faker->paragraph(1),
             'manfaat'           =>  $this->faker->paragraph(1),
             'implementasi'      =>  $this->faker->paragraph(1),

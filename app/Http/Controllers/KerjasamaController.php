@@ -55,6 +55,7 @@ class KerjasamaController extends Controller
             // if (Auth::user()->role == "admin") {
             //     $validated['status'] = "Diterima";
             // }
+            $validated['file_mou'] = $nomorMouFile . '.' . $fileMou->getClientOriginalExtension();
             $permohonan = Kerjasama::create($validated);
             $permohonan->prodi()->attach($validated['prodi']);
             return redirect('/tambah-kerja-sama')->with('success', 'Berhasil Menambahkan Data Kerjasama');
@@ -111,6 +112,13 @@ class KerjasamaController extends Controller
                     Storage::delete('public/file-mou', $validated['nomor_mou_old'] . "." . $fileMou->getClientOriginalExtension());
                 }
                 $fileMou->storeAs('public/file-mou', $nomorMouFile . "." . $fileMou->getClientOriginalExtension());
+                $validated['file_mou'] = $nomorMouFile . '.' . $fileMou->getClientOriginalExtension();
+            }
+            if ($validated['nomor_mou_old'] != $validated['nomor_mou']) {
+                $extension = explode('.', $validated['file_mou']);
+                $nomorMouFile = str_replace('/', '-', $validated['nomor_mou']);
+                Storage::rename('public/file-mou/' . $validated['file_mou'], 'public/file-mou/' . $nomorMouFile . '.' . $extension[1]);
+                $validated['file_mou'] = $nomorMouFile . '.' . $extension[1];
             }
             $validated['id_user'] = Auth::user()->id;
             $validated['id_kategori'] = $validated['kategori'];
