@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Trait\TambahKategoriDanProdi;
 use App\Http\Requests\TambahKerjasamaRequest;
+use App\Http\Requests\UpdateKerjasamaRequest;
 
 class KerjasamaController extends Controller
 {
@@ -19,7 +20,7 @@ class KerjasamaController extends Controller
     {
         return view('admin.kerjasama.lihatKerjasama', [
             'title'     =>  'Daftar Kerjasama',
-            'kerjasama' =>  Kerjasama::with('kategori')->paginate(5),
+            'kerjasama' =>  Kerjasama::with('kategori')->orderBy('id_kerjasama', 'DESC')->paginate(5),
         ]);
     }
     public function tambahDataKerjasama()
@@ -47,7 +48,8 @@ class KerjasamaController extends Controller
             $validated['kategori'] = $this->tambahKategori($validated['kategori']);
         }
         try {
-            $fileMou->storeAs('public/file-mou', $validated['nomor_mou'] . "." . $fileMou->getClientOriginalExtension());
+            $nomorMouFile = str_replace('/', '-', $validated['nomor_mou']);
+            $fileMou->storeAs('public/file-mou', $nomorMouFile . "." . $fileMou->getClientOriginalExtension());
             $validated['id_user'] = Auth::user()->id;
             $validated['id_kategori'] = $validated['kategori'];
             // if (Auth::user()->role == "admin") {
@@ -74,16 +76,20 @@ class KerjasamaController extends Controller
     public function show($id)
     {
         $kerjasama = Kerjasama::with(['prodi', 'kategori'])->findOrFail($id);
+        $selectedProdi = [];
+        foreach ($kerjasama->prodi as $key) {
+            $selectedProdi[] = $key->id_prodi;
+        }
         return  view('admin.kerjasama.editKerjasama', [
             'title' => 'Detail Kerjasama',
             'kerjasama' => $kerjasama,
             'prodi'     =>  Prodi::all(),
             'kategori'  =>  Kategori::all(),
+            'selectedProdi' =>  $selectedProdi
         ]);
     }
-    public function update(TambahKerjasamaRequest $request, $id)
+    public function update(UpdateKerjasamaRequest $request, $id)
     {
-        // dd($request->all());
         $validated = $request->validated();
         $fileMou = $request->file('mou');
         foreach ($validated['prodi'] as $value) {
@@ -98,7 +104,14 @@ class KerjasamaController extends Controller
             $validated['kategori'] = $this->tambahKategori($validated['kategori']);
         }
         try {
-            $fileMou->storeAs('public/file-mou', $validated['nomor_mou'] . "." . $fileMou->getClientOriginalExtension());
+            if (!empty($fileMou)) {
+                $validated['nomor_mou_old'] = str_replace('/', '-', $validated['nomor_mou_old']);
+                $nomorMouFile = str_replace('/', '-', $validated['nomor_mou']);
+                if (Storage::exists('public/file-mou', $validated['nomor_mou_old'] . "." . $fileMou->getClientOriginalExtension())) {
+                    Storage::delete('public/file-mou', $validated['nomor_mou_old'] . "." . $fileMou->getClientOriginalExtension());
+                }
+                $fileMou->storeAs('public/file-mou', $nomorMouFile . "." . $fileMou->getClientOriginalExtension());
+            }
             $validated['id_user'] = Auth::user()->id;
             $validated['id_kategori'] = $validated['kategori'];
             // if (Auth::user()->role == "admin") {
@@ -109,10 +122,9 @@ class KerjasamaController extends Controller
             $permohonan->update($validated);
             // dd($permohonan->prodi()->sync($validated['prodi']));
             $permohonan->prodi()->sync($validated['prodi']);
-            return redirect('/tambah-kerja-sama')->with('success', 'Berhasil Mengubah Data Kerjasama');
+            return redirect('/data-kerjasama')->with('success', 'Berhasil Mengubah Data Kerjasama');
         } catch (\Throwable $e) {
             return $e;
-            // return redirect('/tambah-kerja-sama')->with('error', 'Gagal Menambahkan Data Kerjasama');
         }
     }
     public function destroy($id)

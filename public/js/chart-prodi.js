@@ -8,7 +8,6 @@ $(document).ready(function () {
         $.get(
             `/data-chart-prodi?tahunDari=${tahunDari}&tahunKe=${tahunKe}`,
             function (data, status) {
-                console.log(data);
                 dataChart.data.datasets[0].data = data.total;
                 dataChart.update();
             }
@@ -31,12 +30,14 @@ $(document).ready(function () {
                 labels: data.nama_prodi,
                 datasets: [
                     {
-                        label: "Prodi",
+                        label: "Total ",
                         data: data.total,
                         backgroundColor: [
                             "rgb(255, 99, 132)",
                             "rgb(54, 162, 235)",
-                            "rgb(255, 205, 86)",
+                            "rgb(200, 205, 86)",
+                            "rgb(225, 205, 82)",
+                            "rgb(235, 201, 87)",
                         ],
                         hoverOffset: 4,
                     },

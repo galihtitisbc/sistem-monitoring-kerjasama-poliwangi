@@ -1,9 +1,9 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <div class="col-4">
-                        <select name="tahunDari" class="form-control select-tahun" id="tahunDari">
+                        <select name="tahunDariKategori" class="form-control select-tahun-kategori" id="tahunDariKategori">
                             <option value="all">Semua Tahun</option>
                             @foreach (array_combine(range(date('Y'), 2010), range(date('Y'), 2010)) as $year)
                                 <option value=" {{ $year }}"> {{ $year }}</option>
@@ -11,7 +11,7 @@
                         </select>
                     </div>
                     <div class="col-4">
-                        <select name="tahunKe" class="form-control select-tahun" id="tahunKe">
+                        <select name="tahunKeKategori" class="form-control select-tahun-kategori" id="tahunKeKategori">
                             <option value="all">Semua Tahun</option>
                             @foreach (array_combine(range(date('Y'), 2010), range(date('Y'), 2010)) as $year)
                                 <option value=" {{ $year }}"> {{ $year }}</option>

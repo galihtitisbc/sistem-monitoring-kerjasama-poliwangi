@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Kerjasama;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
@@ -60,6 +61,23 @@ class HomeController extends Controller
         $data = [];
         foreach ($prodi as $key) {
             $data['nama_prodi'][] = $key->nama_prodi;
+            $data['total'][] = $key->kerjasama_count;
+        }
+        return response()->json($data, 200);
+    }
+    public function dataChartKategori(Request $request)
+    {
+        $prodi = Kategori::withCount(['kerjasama' => function ($query) use ($request) {
+            $query->when($request->query('tahunDari') != "all", function ($q) use ($request) {
+                $q->whereYear('kerjasamas.created_at', '>=', trim($request->query('tahunDari')));
+            });
+            $query->when($request->query('tahunKe') != "all", function ($q) use ($request) {
+                $q->whereYear('kerjasamas.created_at', '<=', trim($request->query('tahunKe')));
+            });
+        }])->get();
+        $data = [];
+        foreach ($prodi as $key) {
+            $data['nama_kategori'][] = $key->nama_kategori;
             $data['total'][] = $key->kerjasama_count;
         }
         return response()->json($data, 200);

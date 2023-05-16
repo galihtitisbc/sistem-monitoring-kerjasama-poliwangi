@@ -1,56 +1,55 @@
 $(document).ready(function () {
-    const chartProdi = document.getElementById("chart-kategori");
-    const data = {
-        labels: ["Red", "Blue", "Yellow"],
-        datasets: [
-            {
-                label: "Total",
-                data: [300, 50, 100],
-                backgroundColor: [
-                    "rgb(255, 99, 132)",
-                    "rgb(54, 162, 235)",
-                    "rgb(255, 205, 86)",
+    const chartKategori = document.getElementById("chart-kategori");
+    let dataChart;
+
+    getDataAwalKategori();
+
+    function getDataKategori(tahunDari = "all", tahunKe = "all") {
+        $.get(
+            `/data-chart-kategori?tahunDari=${tahunDari}&tahunKe=${tahunKe}`,
+            function (data, status) {
+                console.log(data);
+                dataChart.data.datasets[0].data = data.total;
+                dataChart.update();
+            }
+        );
+    }
+
+    function getDataAwalKategori(tahunDari = "all", tahunKe = "all") {
+        $.get(
+            `/data-chart-kategori?tahunDari=${tahunDari}&tahunKe=${tahunKe}`,
+            function (data, status) {
+                tampilDataKategori(data);
+            }
+        );
+    }
+
+    function tampilDataKategori(data) {
+        console.log(data);
+        dataChart = new Chart(chartKategori, {
+            type: "doughnut",
+            data: {
+                labels: data.nama_kategori,
+                datasets: [
+                    {
+                        label: "Total : ",
+                        data: data.total,
+                        backgroundColor: [
+                            "rgb(255, 99, 132)",
+                            "rgb(54, 162, 235)",
+                            "rgb(255, 205, 86)",
+                        ],
+                        hoverOffset: 4,
+                    },
                 ],
-                hoverOffset: 4,
             },
-        ],
-    };
-    new Chart(chartProdi, {
-        type: "doughnut",
-        data: data,
+        });
+    }
+
+    $(".select-tahun-kategori").change(function () {
+        let tahunDari = $("#tahunDariKategori option:selected").val();
+        let tahunKe = $("#tahunKeKategori option:selected").val();
+        console.log([tahunDari, tahunKe]);
+        getDataKategori(tahunDari, tahunKe);
     });
-    // getDataAwal();
-
-    // function getData(tahunDari = "all", tahunKe = "all") {
-    //     $.get(
-    //         `/tampildatachart?tahunDari=${tahunDari}&tahunKe=${tahunKe}`,
-    //         function (data, status) {
-    //             console.log(data);
-    //             mychart.data.labels = data.label;
-    //             mychart.data.datasets.forEach((dataset) => {
-    //                 dataset.data = data.data;
-    //             });
-    //             mychart.update();
-    //         }
-    //     );
-    // }
-
-    // function getDataAwal(tahunDari = "all", tahunKe = "all") {
-    //     $.get(
-    //         `/tampildatachart?tahunDari=${tahunDari}&tahunKe=${tahunKe}`,
-    //         function (data, status) {
-    //             tampilData(data);
-    //         }
-    //     );
-    // }
-
-    // function tampilData(data) {
-    // }
-
-    // $(".select-tahun").change(function () {
-    //     let tahunDari = $("#tahunDari option:selected").val();
-    //     let tahunKe = $("#tahunKe option:selected").val();
-    //     console.log([tahunDari, tahunKe]);
-    //     getData(tahunDari, tahunKe);
-    // });
 });

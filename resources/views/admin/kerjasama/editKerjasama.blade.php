@@ -116,8 +116,10 @@
                                             @enderror prodi"
                                                 id="prodi" name="prodi[]" multiple="multiple">
                                                 @foreach ($prodi as $item)
-                                                    <option value="{{ $item->id_prodi }}">
-                                                        {{ $item->nama_prodi }}</option>
+                                                    <option value="{{ $item->id_prodi }}"
+                                                        {{ old('prodi', $item->id_prodi) == in_array($item->id_prodi, $selectedProdi) ? 'selected' : '' }}>
+                                                        {{ $item->nama_prodi }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('prodi')
@@ -134,8 +136,7 @@
                                                 <option value=""></option>
                                                 @foreach ($kategori as $item)
                                                     <option value="{{ $item->id_kategori }}"
-                                                        {{ old('kategori') == $item->id_kategori ? 'selected' : '' }}
-                                                        {{ $item->id_kategori == $kerjasama->id_kategori ? 'selected' : '' }}>
+                                                        {{ $kerjasama->id_kategori == $item->id_kategori ? 'selected' : '' }}>
                                                         {{ $item->nama_kategori }}
                                                     </option>
                                                 @endforeach
@@ -157,6 +158,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputmou1">Nomor Mou</label>
+                                            <input type="hidden" name="nomor_mou_old"
+                                                value="{{ $kerjasama->nomor_mou }}">
                                             <input value="{{ $kerjasama->nomor_mou }}" type="text"
                                                 class="form-control @error('nomor_mou')
                                                 is-invalid
