@@ -87,7 +87,11 @@
                                                 <td>{{ $item->status == 0 ? 'Belum Disetujui' : 'Disetujui' }}</td>
                                                 <td class=""><a
                                                         href="/download/{{ str_replace('/', '-', $item->nomor_mou) }}"><i
-                                                            class="icon-ganteng fa-solid fa-folder-arrow-down"></i></a></td>
+                                                            class="icon-ganteng fa-solid fa-file-arrow-down"></i>
+
+
+
+
                                                 <td class=" ">
                                                     <div class="action">
                                                         <a href="{{ route('edit-kerjasama', $item->id_kerjasama) }}"><i
