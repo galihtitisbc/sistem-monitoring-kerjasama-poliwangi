@@ -161,4 +161,26 @@ class KerjasamaController extends Controller
             'selectedProdi' =>  $selectedProdi
         ]);
     }
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+
+        if (!empty($cari)) {
+            $kerjasama = Kerjasama::with('kategori')
+                ->where(function ($query) use ($cari) {
+                    $query->where('nomor_mou', 'like', "%" . $cari . "%")
+                        ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
+                })
+                ->paginate(10);
+        } else {
+            $kerjasama = Kerjasama::with('kategori')
+                ->orderBy('id_kerjasama', 'DESC')
+                ->paginate(10);
+        }
+
+        return view('admin.kerjasama.lihatKerjasama', [
+            'title' => 'Data Kerjasama',
+            'kerjasama' => $kerjasama
+        ]);
+    }
 }
