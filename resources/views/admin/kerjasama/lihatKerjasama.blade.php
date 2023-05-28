@@ -4,7 +4,7 @@
         .tio-button {
             border: none !important;
             background: none !important;
-            color: #780000;
+            color: #004878;
             cursor: pointer;
         }
 
@@ -88,22 +88,13 @@
                                                 <td class=""><a
                                                         href="/download/{{ str_replace('/', '-', $item->nomor_mou) }}"><i
                                                             class="icon-ganteng fa-solid fa-file-arrow-down"></i>
-
-
-
-
                                                 <td class=" ">
                                                     <div class="action">
                                                         <a href="{{ route('edit-kerjasama', $item->id_kerjasama) }}"><i
                                                                 class="icon-ganteng fa-solid fa-pen-to-square"></i></a>
-                                                        <form method="POST" class="submitdelete"
-                                                            action="{{ route('hapus-kerjasama', $item->id_kerjasama) }}">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button class="tio-button" type="submit" href=""><i
-                                                                    class="icon-ganteng fa-solid fa-trash-can"></i></button>
+                                                        <a href="{{ route('detail-kerjasama', $item->id_kerjasama) }}"><i
+                                                                class=" ml-1 icon-ganteng fa-solid fa-eye"></i></a>
 
-                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -122,7 +113,7 @@
     </section>
     </div>
     @push('js')
-        <script>
+        {{-- <script>
             $('.tio-button').on("click", function(e) {
                 e.preventDefault();
                 // var form = $(this).parents('form');
@@ -141,6 +132,6 @@
                     }
                 })
             })
-        </script>
+        </script> --}}
     @endpush
 @endsection

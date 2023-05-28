@@ -146,4 +146,19 @@ class KerjasamaController extends Controller
             return redirect('/data-kerjasama')->with('error', 'Gagal Menghapus Data Kerjasama');
         }
     }
+    public function detail($id)
+    {
+        $kerjasama = Kerjasama::with(['prodi', 'kategori'])->findOrFail($id);
+        $selectedProdi = [];
+        foreach ($kerjasama->prodi as $key) {
+            $selectedProdi[] = $key->id_prodi;
+        }
+        return  view('admin.kerjasama.detailKerjasama', [
+            'title' => 'Detail Kerjasama',
+            'kerjasama' => $kerjasama,
+            'prodi'     =>  Prodi::all(),
+            'kategori'  =>  Kategori::all(),
+            'selectedProdi' =>  $selectedProdi
+        ]);
+    }
 }
