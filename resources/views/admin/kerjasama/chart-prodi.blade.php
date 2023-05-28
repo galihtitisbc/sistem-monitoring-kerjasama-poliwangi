@@ -3,6 +3,7 @@
             <div>
                 <div class="row d-flex justify-content-center">
                     <div class="col-4 mr-4">
+                        <label for="tahunDariProdi">Dari Tahun : </label>
                         <select name="tahunDariProdi" class="form-control select-tahun-prodi" id="tahunDariProdi">
                             <option value="all">Semua Tahun</option>
                             @foreach (array_combine(range(date('Y'), 2010), range(date('Y'), 2010)) as $year)
@@ -11,6 +12,7 @@
                         </select>
                     </div>
                     <div class="col-4">
+                        <label for="tahunKeProdi">Ke Tahun : </label>
                         <select name="tahunKeProdi" class="form-control select-tahun-prodi" id="tahunKeProdi">
                             <option value="all">Semua Tahun</option>
                             @foreach (array_combine(range(date('Y'), 2010), range(date('Y'), 2010)) as $year)

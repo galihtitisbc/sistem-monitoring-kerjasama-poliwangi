@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Trait\TambahKategoriDanProdi;
 use App\Http\Requests\TambahKerjasamaRequest;
 use App\Http\Requests\UpdateKerjasamaRequest;
+use App\Http\Trait\Notifikasi;
 
 class KerjasamaController extends Controller
 {
-    use TambahKategoriDanProdi;
+    use TambahKategoriDanProdi, Notifikasi;
     public function index()
     {
         return view('admin.kerjasama.lihatKerjasama', [
@@ -52,9 +53,9 @@ class KerjasamaController extends Controller
             $fileMou->storeAs('public/file-mou', $nomorMouFile . "." . $fileMou->getClientOriginalExtension());
             $validated['id_user'] = Auth::user()->id;
             $validated['id_kategori'] = $validated['kategori'];
-            // if (Auth::user()->role == "admin") {
-            //     $validated['status'] = "Diterima";
-            // }
+            if (Auth::user()->role == "admin") {
+                $validated['status'] = 1;
+            }
             $validated['file_mou'] = $nomorMouFile . '.' . $fileMou->getClientOriginalExtension();
             $permohonan = Kerjasama::create($validated);
             $permohonan->prodi()->attach($validated['prodi']);
