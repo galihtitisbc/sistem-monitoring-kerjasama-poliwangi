@@ -9,7 +9,6 @@
     </title>
 
     <!-- General CSS Files -->
-    {{ $f }}
     <link rel="stylesheet" href="{{ config('app.url') }}/assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ config('app.url') }}/assets/modules/fontawesome/css/all.min.css">
 

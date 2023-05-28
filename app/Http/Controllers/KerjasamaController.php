@@ -12,11 +12,10 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Trait\TambahKategoriDanProdi;
 use App\Http\Requests\TambahKerjasamaRequest;
 use App\Http\Requests\UpdateKerjasamaRequest;
-use App\Http\Trait\Notifikasi;
 
 class KerjasamaController extends Controller
 {
-    use TambahKategoriDanProdi, Notifikasi;
+    use TambahKategoriDanProdi;
     public function index()
     {
         return view('admin.kerjasama.lihatKerjasama', [
