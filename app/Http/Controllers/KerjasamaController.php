@@ -18,6 +18,7 @@ class KerjasamaController extends Controller
     use TambahKategoriDanProdi;
     public function index()
     {
+
         return view('admin.kerjasama.lihatKerjasama', [
             'title'     =>  'Daftar Kerjasama',
             'kerjasama' =>  Kerjasama::with('kategori')->orderBy('id_kerjasama', 'DESC')->paginate(5),
