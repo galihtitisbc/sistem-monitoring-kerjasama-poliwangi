@@ -38,29 +38,19 @@
                                 <div class="row">
                                     <div class="col-3"></div>
                                     <div class="col">
-                                        <form class="form" method="get" action="{{ route('cari-kerjasama') }}">
-                                            <div class="form-group w-100 mb-3">
-
-                                                <input type="text" name="cari" class="form-control w-75 d-inline"
-                                                    id="search" placeholder="Masukkan Nomor Mou / Nama Instansi">
-                                                <button type="submit" class="btn btn-primary">Cari</button>
-                                            </div>
-                                        </form>
-
-
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <input type="text" name="cari"
                                                 class="form-control @error('cari') is-invalid @enderror"placeholder="Masukkan Nomor Mou / Nama Instansi">
                                             @error('cari')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
-                                        </div> --}}
+                                        </div>
                                     </div>
-                                    {{-- <div class="col">
+                                    <div class="col">
                                         <div class="form-group">
                                             <button class="btn btn-primary">Cari</button>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </form>
                             <div class="table-responsive">
