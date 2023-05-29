@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             }
         }
         view()->composer('*', function ($view) use ($dataKerjasamaArray) {
-            $view->with('kerjasama', $dataKerjasamaArray);
+            $view->with('kerjasamaArray', $dataKerjasamaArray);
         });
     }
 }
