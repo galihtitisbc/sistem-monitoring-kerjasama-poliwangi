@@ -172,6 +172,7 @@ class KerjasamaController extends Controller
                         ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
                 })
                 ->paginate(10);
+            /////
         } else {
             $kerjasama = Kerjasama::with('kategori')
                 ->orderBy('id_kerjasama', 'DESC')
