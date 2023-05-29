@@ -137,6 +137,7 @@ class KerjasamaController extends Controller
     }
     public function destroy($id)
     {
+        //////////
         try {
             $kerjasama = Kerjasama::findOrFail($id);
             $kerjasama->delete();
