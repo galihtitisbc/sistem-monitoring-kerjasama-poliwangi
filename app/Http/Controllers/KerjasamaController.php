@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Trait\TambahKategoriDanProdi;
 use App\Http\Requests\TambahKerjasamaRequest;
 use App\Http\Requests\UpdateKerjasamaRequest;
+use Carbon\Carbon;
 
 class KerjasamaController extends Controller
 {
@@ -165,23 +166,31 @@ class KerjasamaController extends Controller
     public function cari(Request $request)
     {
         $cari = $request->cari;
-
-        if (!empty($cari)) {
-            $kerjasama = Kerjasama::with('kategori')
-                ->where(function ($query) use ($cari) {
-                    $query->where('nomor_mou', 'like', "%" . $cari . "%")
-                        ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
-                })
-                ->paginate(10);
-        } else {
-            $kerjasama = Kerjasama::with('kategori')
-                ->orderBy('id_kerjasama', 'DESC')
-                ->paginate(10);
-        }
-
+        $expired = $request->expired;
+        $kerjasama = Kerjasama::query();
+        // if (!empty($cari)) {
+        //     $kerjasama = Kerjasama::with('kategori')
+        //         ->where(function ($query) use ($cari) {
+        //             $query->where('nomor_mou', 'like', "%" . $cari . "%")
+        //                 ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
+        //         })
+        //         ->paginate(10);
+        // } else {
+        //     $kerjasama = Kerjasama::with('kategori')
+        //         ->orderBy('id_kerjasama', 'DESC')
+        //         ->paginate(10);
+        // }
+        $kerjasama->when($cari != null, function ($q) use ($cari) {
+            return $q->where('nomor_mou', 'like', "%" . $cari . "%")
+                ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
+        });
+        $kerjasama->when($expired == 'akan_berakhir', function ($q) use ($expired) {
+            return $q->whereBetween('tgl_berakhir', [Carbon::now()->subMonths(3), Carbon::now()]);
+        });
+        dd($kerjasama->get());
         return view('admin.kerjasama.lihatKerjasama', [
             'title' => 'Data Kerjasama',
-            'kerjasama' => $kerjasama
+            'kerjasama' => $kerjasama->paginate(10)
         ]);
     }
 }

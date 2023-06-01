@@ -34,35 +34,57 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="" class="">
+                            <form class="form" method="get" action="{{ route('cari-kerjasama') }}">
+                                <div class="row justify-content-center">
+                                    <div class="col-1"></div>
+                                    <div class="col-6 ml-5">
+                                        <div class="form-group w-100 mb-3">
+                                            <input type="text" name="cari" class="form-control w-75 d-inline"
+                                                id="search" placeholder="Masukkan Nomor Mou / Nama Instansi">
+                                        </div>
+                                    </div>
+                                    <div class="col-3 mr-5">
+                                        <select name="expired" class="form-control" id="">
+                                            <option value="all" selected>--- Semua ---</option>
+                                            <option value="akan_berakhir">Akan Berakhir</option>
+                                            <option value="berakhir">Telah Berakhir</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {{-- <form action="" class="">
                                 <div class="row">
                                     <div class="col-3"></div>
                                     <div class="col">
                                         <form class="form" method="get" action="{{ route('cari-kerjasama') }}">
                                             <div class="form-group w-100 mb-3">
-
                                                 <input type="text" name="cari" class="form-control w-75 d-inline"
                                                     id="search" placeholder="Masukkan Nomor Mou / Nama Instansi">
                                                 <button type="submit" class="btn btn-primary">Cari</button>
                                             </div>
                                         </form>
-
-
-                                        {{-- <div class="form-group">
+                                        //
+                                        <div class="form-group">
                                             <input type="text" name="cari"
                                                 class="form-control @error('cari') is-invalid @enderror"placeholder="Masukkan Nomor Mou / Nama Instansi">
                                             @error('cari')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
-                                        </div> --}}
+                                        </div>
+                                        //
                                     </div>
-                                    {{-- <div class="col">
+                                    ///
+                                    <div class="col">
                                         <div class="form-group">
                                             <button class="btn btn-primary">Cari</button>
                                         </div>
-                                    </div> --}}
+                                    </div>
+                                    //
                                 </div>
-                            </form>
+                            </form> --}}
                             <div class="table-responsive">
                                 <table class="table table-striped text-center">
                                     <thead>
