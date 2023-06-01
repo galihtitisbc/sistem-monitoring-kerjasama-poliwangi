@@ -36,7 +36,7 @@ $(document).ready(function () {
                         label: "Total Kerjasama Per Tahun",
                         data: data.data,
                         borderWidth: 1,
-                        backgroundColor: "blue",
+                        backgroundColor: "#004878",
                     },
                 ],
             },

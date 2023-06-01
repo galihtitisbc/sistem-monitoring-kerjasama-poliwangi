@@ -10,11 +10,19 @@
             @foreach ($kerjasamaArray as $item)
                 <a href="#" class="dropdown-item dropdown-item-unread">
                     <div class="dropdown-item-icon bg-primary text-white">
-                        <i class="fas fa-code"></i>
+                        @if ($item['status'] == 'Berakhir')
+                            <i class="fa-solid fa-stopwatch"></i>
+                        @else
+                            <i class="fas fa-bell"></i>
+                        @endif
                     </div>
                     <div class="dropdown-item-desc">
                         Kerjasama Dengan Nomor MOU {{ $item['nomor_mou'] }}
-                        <div class="time text-primary">{{ $item['tgl_berakhir'] }}</div>
+                        @if ($item['status'] == 'Berakhir')
+                            <div class="time text-primary">Telah Berakhir Pada {{ $item['tgl_berakhir'] }}</div>
+                        @else
+                            <div class="time text-primary">Akan Berakhir Pada {{ $item['tgl_berakhir'] }}</div>
+                        @endif
                     </div>
                 </a>
             @endforeach
