@@ -184,10 +184,12 @@ class KerjasamaController extends Controller
             return $q->where('nomor_mou', 'like', "%" . $cari . "%")
                 ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
         });
-        $kerjasama->when($expired == 'akan_berakhir', function ($q) use ($expired) {
-            return $q->whereBetween('tgl_berakhir', [Carbon::now()->subMonths(3), Carbon::now()]);
+        $kerjasama->when($expired == 'berakhir', function ($q) use ($expired) {
+            return $q->where('tgl_berakhir', '<=', Carbon::now());
         });
-        dd($kerjasama->get());
+        $kerjasama->when($expired == 'akan_berakhir', function ($q) use ($expired) {
+            return $q->whereBetween('tgl_berakhir', [Carbon::now(), Carbon::now()->addMonth(3)]);
+        });
         return view('admin.kerjasama.lihatKerjasama', [
             'title' => 'Data Kerjasama',
             'kerjasama' => $kerjasama->paginate(10)
