@@ -192,7 +192,7 @@ class KerjasamaController extends Controller
         });
         return view('admin.kerjasama.lihatKerjasama', [
             'title' => 'Data Kerjasama',
-            'kerjasama' => $kerjasama->paginate(10)
+            'kerjasama' => $kerjasama->orderBy('id_kerjasama', 'DESC')->paginate(10)
         ]);
     }
 }
