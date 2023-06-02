@@ -34,16 +34,17 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form class="form" method="get" action="{{ route('cari-kerjasama') }}">
-                                <div class="row justify-content-center">
-                                    <div class="col-1"></div>
-                                    <div class="col-6 ml-5">
-                                        <div class="form-group w-100 mb-3">
-                                            <input type="text" name="cari" class="form-control w-75 d-inline"
-                                                id="search" placeholder="Masukkan Nomor Mou / Nama Instansi">
-                                        </div>
+                            <form class="form mb-3" method="get" action="{{ route('cari-kerjasama') }}">
+                                <div class="row">
+                                    <div class="col-3 ">
+                                        <label>Cari Data </label>
+
+                                        <input type="text" name="cari" class="form-control" id="search"
+                                            placeholder="Masukkan Nomor Mou / Nama Instansi">
+
                                     </div>
-                                    <div class="col-3 mr-5">
+                                    <div class="col-3 ">
+                                        <label>Filter Data </label>
                                         <select name="expired" class="form-control" id="">
                                             <option value="all" selected>--- Semua ---</option>
                                             <option value="akan_berakhir"
@@ -54,11 +55,22 @@
                                             </option>
                                         </select>
                                     </div>
+                                    <div class="col-3 ">
+                                        <label>Urutkan Data </label>
+                                        <select name="sort" class="form-control" id="">
+                                            <option value="default" selected>--- Default ---</option>
+                                            <option value="nama">Nama </option>
+                                            <option value="tanggal_mulai">Tanggal Mulai</option>
+                                            <option value="tanggal_berakhir">Tanggal Berakhir</option>
+                                        </select>
+                                    </div>
                                     <div class="col-1">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                        <label></label>
+                                        <button type="submit" class="btn btn-primary mt-1">Submit</button>
                                     </div>
                                 </div>
                             </form>
+
                             {{-- <form action="" class="">
                                 <div class="row">
                                     <div class="col-3"></div>
@@ -137,11 +149,12 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="pagination pl-2 ml-4">
+                                    {{ $kerjasama->links('pagination::bootstrap-4') }}
+                                </div>
                             </div>
                         </div>
-                        <div class="pagination pl-2 ml-4">
-                            {{ $kerjasama->links('pagination::bootstrap-4') }}
-                        </div>
+
                     </div>
                 </div>
             </div>

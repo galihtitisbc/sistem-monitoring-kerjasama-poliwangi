@@ -30,7 +30,7 @@ $(document).ready(function () {
                 labels: data.nama_prodi,
                 datasets: [
                     {
-                        label: "Total ",
+                        label: "Total",
                         data: data.total,
                         backgroundColor: [
                             "rgb(255, 99, 132)",
@@ -39,9 +39,20 @@ $(document).ready(function () {
                             "rgb(225, 205, 82)",
                             "rgb(235, 201, 87)",
                         ],
-                        hoverOffset: 4,
+                        // hoverOffset: 4,
                     },
                 ],
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: "#000", // Label text color
+                        font: {
+                            weight: "bold",
+                        },
+                        display: true, // Show labels by default
+                    },
+                },
             },
         });
     }

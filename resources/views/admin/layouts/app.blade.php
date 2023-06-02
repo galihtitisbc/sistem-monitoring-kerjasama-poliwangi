@@ -48,7 +48,7 @@
 
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+                    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">Messages
@@ -123,7 +123,7 @@
                                 <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
                     @include('admin.notifikasi.notifikasi')
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -132,8 +132,8 @@
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
+                            {{-- <div class="dropdown-title">Last Logged in {{ $last_login }}ago</div>   --}}
+                            {{-- <a href="features-profile.html" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
                             </a>
                             <a href="features-activities.html" class="dropdown-item has-icon">
@@ -141,7 +141,7 @@
                             </a>
                             <a href="features-settings.html" class="dropdown-item has-icon">
                                 <i class="fas fa-cog"></i> Settings
-                            </a>
+                            </a> --}}
                             <div class="dropdown-divider"></div>
                             {{-- <a href="#" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
@@ -183,8 +183,8 @@
                                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                             </ul>
                         </li> --}}
-                        <li class="{{ request()->segment(1) == 'data-kerjasama' ? 'active' : '' }}"><a
-                                class="nav-link" href="/data-kerjasama"><i class="fas fa-table"></i>
+                        <li class="{{ request()->segment(1) == 'data-kerjasama' ? 'active' : '' }}"><a class="nav-link"
+                                href="/data-kerjasama"><i class="fas fa-table"></i>
                                 <span>Data Kerja
                                     Sama</span></a></li>
                         <li class="{{ request()->segment(1) == 'tambah-kerja-sama' ? 'active' : '' }}"><a

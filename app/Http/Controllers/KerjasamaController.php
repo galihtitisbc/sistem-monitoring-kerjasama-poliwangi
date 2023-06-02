@@ -165,9 +165,6 @@ class KerjasamaController extends Controller
     }
     public function cari(Request $request)
     {
-        $cari = $request->cari;
-        $expired = $request->expired;
-        $kerjasama = Kerjasama::query();
         // if (!empty($cari)) {
         //     $kerjasama = Kerjasama::with('kategori')
         //         ->where(function ($query) use ($cari) {
@@ -180,6 +177,11 @@ class KerjasamaController extends Controller
         //         ->orderBy('id_kerjasama', 'DESC')
         //         ->paginate(10);
         // }
+        $cari = $request->cari;
+        $expired = $request->expired;
+        $sort = $request->sort;
+        $kerjasama = Kerjasama::query();
+
         $kerjasama->when($cari != null, function ($q) use ($cari) {
             return $q->where('nomor_mou', 'like', "%" . $cari . "%")
                 ->orWhere('nama_instansi', 'like', "%" . $cari . "%");
@@ -190,6 +192,13 @@ class KerjasamaController extends Controller
         $kerjasama->when($expired == 'akan_berakhir', function ($q) use ($expired) {
             return $q->whereBetween('tgl_berakhir', [Carbon::now(), Carbon::now()->addMonth(3)]);
         });
+        if ($sort == 'name') {
+            $kerjasama->orderBy('nama_instansi');
+        } elseif ($sort == 'tanggal_mulai') {
+            $kerjasama->orderBy('tgl_mulai');
+        } elseif ($sort == 'tanggal_berakhir') {
+            $kerjasama->orderBy('tgl_berakhir');
+        }
         return view('admin.kerjasama.lihatKerjasama', [
             'title' => 'Data Kerjasama',
             'kerjasama' => $kerjasama->orderBy('id_kerjasama', 'DESC')->paginate(10)

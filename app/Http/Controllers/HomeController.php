@@ -28,8 +28,35 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $user   = auth()->user();
+        // $last_login = Carbon::now()->diffInSeconds(Carbon::parse($user->last_login));
+        $total_luar_negeri = Kerjasama::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'luar negeri');
+        })->count();
+        $total_instansi_pemerintah = Kerjasama::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'instansi pemerintah');
+        })->count();
+        $total_bumn = Kerjasama::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'bumn');
+        })->count();
+        $total_pt = Kerjasama::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'perguruan tinggi');
+        })->count();
+        $total_industri = Kerjasama::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'Industri, Masyarakat dan PKL');
+        })->count();
+        $total_all = Kerjasama::count();
+        // dd($total_luar_negeri . $total_instansi_pemerintah . $total_bumn . $total_pt . $total_industri);
+
         return view('admin.home', [
-            'title'     =>  'Dashboard'
+            'title'     =>  'Dashboard',
+            'total_luar_negeri' => $total_luar_negeri,
+            'total_instansi_pemerintah' => $total_instansi_pemerintah,
+            'total_bumn' => $total_bumn,
+            'total_pt' => $total_pt,
+            'total_industri' => $total_industri,
+            'total_all' => $total_all,
+            // 'last_login' => $last_login
         ]);
     }
     public function dataChart(Request $request)
