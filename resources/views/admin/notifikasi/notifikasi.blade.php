@@ -1,3 +1,26 @@
+@php
+    $dataKerjasama = App\Models\Kerjasama::all();
+    $dataKerjasamaArray = [];
+    foreach ($dataKerjasama as $key => $value) {
+        $tglSekarang = Carbon\Carbon::now();
+        $tglBerakhir = Carbon\Carbon::parse($value->tgl_berakhir);
+        if ($tglBerakhir->gte($tglSekarang)) {
+            if ($tglSekarang->diffInMonths($tglBerakhir) <= 3) {
+                $dataKerjasamaArray[] = [
+                    'tgl_berakhir' => $value->tgl_berakhir,
+                    'nomor_mou' => $value->nomor_mou,
+                    'status' => 'Akan Berakhir',
+                ];
+            }
+        } else {
+            $dataKerjasamaArray[] = [
+                'tgl_berakhir' => $value->tgl_berakhir,
+                'nomor_mou' => $value->nomor_mou,
+                'status' => 'Berakhir',
+            ];
+        }
+    }
+@endphp
 <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
         class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
     <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -7,7 +30,7 @@
                                 </div> --}}
         </div>
         <div class="dropdown-list-content dropdown-list-icons">
-            @foreach ($kerjasamaArray as $item)
+            @foreach ($dataKerjasamaArray as $item)
                 <a href="#" class="dropdown-item dropdown-item-unread">
                     <div class="dropdown-item-icon bg-primary text-white">
                         @if ($item['status'] == 'Berakhir')

@@ -46,8 +46,12 @@
                                     <div class="col-3 mr-5">
                                         <select name="expired" class="form-control" id="">
                                             <option value="all" selected>--- Semua ---</option>
-                                            <option value="akan_berakhir">Akan Berakhir</option>
-                                            <option value="berakhir">Telah Berakhir</option>
+                                            <option value="akan_berakhir"
+                                                {{ request('expired') == 'akan_berakhir' ? 'selected' : '' }}>Akan Berakhir
+                                            </option>
+                                            <option value="berakhir"
+                                                {{ request('expired') == 'berakhir' ? 'selected' : '' }}>Telah Berakhir
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-1">
