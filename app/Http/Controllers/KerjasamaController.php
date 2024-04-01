@@ -68,6 +68,7 @@ class KerjasamaController extends Controller
     }
     public function download($nomor_mou)
     {
+        $nomor_mou = str_replace('.', '-', $nomor_mou);
         if (Storage::exists('public/file-mou/' . $nomor_mou . '.pdf')) {
             return Storage::download('public/file-mou/' . $nomor_mou . '.pdf');
         } elseif (Storage::exists('public/file-mou/' . $nomor_mou . '.docx')) {
@@ -108,29 +109,29 @@ class KerjasamaController extends Controller
         }
         try {
             if (!empty($fileMou)) {
-                $validated['nomor_mou_old'] = str_replace('/', '-', $validated['nomor_mou_old']);
-                $nomorMouFile = str_replace('/', '-', $validated['nomor_mou']);
-                if (Storage::exists('public/file-mou', $validated['nomor_mou_old'] . "." . $fileMou->getClientOriginalExtension())) {
-                    Storage::delete('public/file-mou', $validated['nomor_mou_old'] . "." . $fileMou->getClientOriginalExtension());
+                $validated['nomor_mou_old'] = str_replace(['/', '.'], '-', $validated['nomor_mou_old']);
+                $nomorMouFile = str_replace(['/', '.'], '-', $validated['nomor_mou']);
+                if (Storage::exists('public/file-mou/' . $validated['nomor_mou_old'] . '.pdf')) {
+                    Storage::delete('public/file-mou/' . $validated['nomor_mou_old'] . '.pdf');
+                } else if (Storage::exists('public/file-mou/' . $validated['nomor_mou_old'] . '.docx')) {
+                    Storage::delete('public/file-mou/' . $validated['nomor_mou_old'] . '.docx');
+                } else {
+                    return "gagal";
                 }
-                $fileMou->storeAs('public/file-mou', $nomorMouFile . "." . $fileMou->getClientOriginalExtension());
                 $validated['file_mou'] = $nomorMouFile . '.' . $fileMou->getClientOriginalExtension();
+                $fileMou->storeAs('public/file-mou/', $validated['file_mou']);
             }
             if ($validated['nomor_mou_old'] != $validated['nomor_mou']) {
                 $extension = explode('.', $validated['file_mou']);
-                $nomorMouFile = str_replace('/', '-', $validated['nomor_mou']);
-                Storage::rename('public/file-mou/' . $validated['file_mou'], 'public/file-mou/' . $nomorMouFile . '.' . $extension[1]);
-                $validated['file_mou'] = $nomorMouFile . '.' . $extension[1];
+                $extension = end($extension);
+                $nomorMouFile = str_replace(['/', '.'], '-', $validated['nomor_mou']);
+                Storage::rename('public/file-mou/' . $validated['file_mou'], 'public/file-mou/' . $nomorMouFile . '.' . $extension);
+                $validated['file_mou'] = $nomorMouFile . '.' . $extension;
             }
             $validated['id_user'] = Auth::user()->id;
             $validated['id_kategori'] = $validated['kategori'];
-            // if (Auth::user()->role == "admin") {
-            //     $validated['status'] = "Diterima";
-            // }
-            // $permohonan = Kerjasama::($validated);
             $permohonan = Kerjasama::findOrFail($id);
             $permohonan->update($validated);
-            // dd($permohonan->prodi()->sync($validated['prodi']));
             $permohonan->prodi()->sync($validated['prodi']);
             return redirect('/data-kerjasama')->with('success', 'Berhasil Mengubah Data Kerjasama');
         } catch (\Throwable $e) {
